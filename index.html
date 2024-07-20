@@ -16,17 +16,22 @@
         <iframe id="live-video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
     <script>
+        // Función para actualizar la ID del video desde un archivo JSON
         async function updateVideo() {
             try {
                 let response = await fetch('videoId.json');
                 let data = await response.json();
                 let videoId = data.videoId;
+
+                // Actualiza el iframe con la nueva ID del video
                 let iframe = document.getElementById("live-video");
                 iframe.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1";
             } catch (error) {
                 console.error('Error al obtener la ID del video:', error);
             }
         }
+
+        // Llama a la función para actualizar el video cuando la página se carga
         window.onload = updateVideo;
     </script>
 </body>
