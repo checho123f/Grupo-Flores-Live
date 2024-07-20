@@ -19,13 +19,14 @@ header img {
 }
 header h1 {
     margin: 0;
-    font-size: 1.5rem; /* Tamaño de fuente responsivo */
+    font-size: 2rem; /* Tamaño de fuente responsivo */
+    text-align: center;
 }
 #video-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh; /* Ajustar altura del contenedor */
+    height: calc(100vh - 60px); /* Ajustar altura del contenedor */
     background-color: #000;
     padding: 20px; /* Añadir un poco de espacio alrededor */
 }
@@ -34,18 +35,33 @@ iframe {
     height: 100%;
     max-width: 800px; /* Ancho máximo para pantallas grandes */
     max-height: 450px; /* Alto máximo para pantallas grandes */
+    border: none; /* Eliminar borde del iframe */
 }
 
 /* Media Queries para pantallas más pequeñas */
+@media (max-width: 1200px) {
+    iframe {
+        max-width: 600px; /* Ajustar ancho en pantallas medianas */
+        max-height: 337.5px; /* Ajustar alto en pantallas medianas */
+    }
+}
+
+@media (max-width: 900px) {
+    iframe {
+        max-width: 480px; /* Ajustar ancho en pantallas medianas */
+        max-height: 270px; /* Ajustar alto en pantallas medianas */
+    }
+}
+
 @media (max-width: 600px) {
     header h1 {
-        font-size: 1.2rem; /* Tamaño de fuente más pequeño en móviles */
+        font-size: 1.5rem; /* Tamaño de fuente más pequeño en móviles */
     }
     #video-container {
-        height: 50vh; /* Ajustar altura en móviles */
+        height: calc(100vh - 50px); /* Ajustar altura en móviles */
     }
     iframe {
         max-width: 100%; /* Hacer el iframe más grande en móviles */
-        max-height: 300px; /* Ajustar altura en móviles */
+        max-height: 100%; /* Ajustar altura en móviles */
     }
 }
