@@ -6,6 +6,7 @@
     <title>Grupo Flores Live</title>
     <link rel="icon" href="image/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </head>
 <body>
     <header>
@@ -13,26 +14,24 @@
         <h1>Grupo Flores Live</h1>
     </header>
     <div id="video-container">
-        <iframe id="live-video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <video id="video" controls autoplay></video>
     </div>
     <script>
-        // Función para actualizar la ID del video desde un archivo JSON
-        async function updateVideo() {
-            try {
-                let response = await fetch('videoId.json');
-                let data = await response.json();
-                let videoId = data.videoId;
-
-                // Actualiza el iframe con la nueva ID del video
-                let iframe = document.getElementById("live-video");
-                iframe.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1";
-            } catch (error) {
-                console.error('Error al obtener la ID del video:', error);
-            }
+        if (Hls.isSupported()) {
+            var video = document.getElementById('video');
+            var hls = new Hls();
+            hls.loadSource('http://167.249.23.18/hls/stream.m3u8');  // Asegúrate de usar tu IP pública
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                video.play();
+            });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = 'http://167.249.23.18/hls/stream.m3u8';  // Asegúrate de usar tu IP pública
+            video.addEventListener('loadedmetadata', function() {
+                video.play();
+            });
         }
-
-        // Llama a la función para actualizar el video cuando la página se carga
-        window.onload = updateVideo;
     </script>
 </body>
 </html>
+
