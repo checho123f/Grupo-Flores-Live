@@ -6,7 +6,6 @@
     <title>Grupo Flores Live</title>
     <link rel="icon" href="image/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </head>
 <body>
     <header>
@@ -14,24 +13,14 @@
         <h1>Grupo Flores Live</h1>
     </header>
     <div id="video-container">
-        <video id="video" controls autoplay></video>
+        <iframe
+            src="https://player.twitch.tv/?channel=mktwebgrupoflores&parent=github.io"
+            frameborder="0"
+            allowfullscreen="true"
+            scrolling="no"
+            height="100%"
+            width="100%">
+        </iframe>
     </div>
-    <script>
-        if (Hls.isSupported()) {
-            var video = document.getElementById('video');
-            var hls = new Hls();
-            hls.loadSource('http://167.249.23.18/hls/stream.m3u8');  // Asegúrate de usar tu IP pública
-            hls.attachMedia(video);
-            hls.on(Hls.Events.MANIFEST_PARSED, function() {
-                video.play();
-            });
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = 'http://167.249.23.18/hls/stream.m3u8';  // Asegúrate de usar tu IP pública
-            video.addEventListener('loadedmetadata', function() {
-                video.play();
-            });
-        }
-    </script>
 </body>
 </html>
-
